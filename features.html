@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="img/moneylogo.png" alt="Logo">
+        </div>
+        <div class="header-content">
+            <h1>Features Page</h1>
+        </div>
+    </header>
+
+    <nav>
+      <nav class="main-nav">
+          <button onclick="window.location.href='home.html'">Home</button>
+          <button onclick="window.location.href='booklist.html'">Book List</button>
+          <button onclick="window.location.href='financialtools.html'">Financial Tools</button>
+          <button onclick="window.location.href='articles.html'">Articles</button>
+          <button onclick="window.location.href='about.html'">About Us</button>
+        <button onclick="window.location.href='features.html'">Features</button>
+          <button onclick="window.location.href='favorites.html'">Favorites</button>
+      </nav>
+        <button onclick="window.history.back()">Back</button>
+    </nav>
+
+    <main class="content">
+        <!-- Filtered List Section -->
+        <section>
+            <h2>Filtered List of Financial Resources</h2>
+            <input type="text" id="filterInput" placeholder="Filter by title...">
+            <ul id="resourceList">
+                <li><img src="img/wallet.jpg" alt="wallet" class="icon"> Budgeting Basics</li>
+                <li><img src="img/investing.jpg" alt="money" class="icon">Investing 101</li>
+                <li><img src="img/bills.jpg" alt="bills" class="icon">Debt Management</li>
+                <li><img src="img/retire.jpg" alt="old man" class="icon">Retirement Planning</li>
+                <li><img src="img/savings.jpg" alt="piggy bank" class="icon">Savings Strategies</li>
+            </ul>
+        </section>
+
+        <!-- Form Section -->
+        <section>
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <label for="newsletter">Subscribe to our newsletter:</label>
+                <input type="checkbox" id="newsletter" name="newsletter">
+
+                <label for="contactMethod">Preferred Contact Method:</label>
+                <select id="contactMethod" name="contactMethod">
+                    <option value="email">Email</option>
+                    <option value="phone">Phone</option>
+                </select>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Wealth of Knowledge. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Filter List Functionality
+        document.getElementById('filterInput').addEventListener('keyup', function() {
+            const filterValue = this.value.toLowerCase();
+            const listItems = document.getElementById('resourceList').getElementsByTagName('li');
+            Array.from(listItems).forEach(function(item) {
+                const text = item.textContent || item.innerText;
+                item.style.display = text.toLowerCase().includes(filterValue) ? '' : 'none';
+            });
+        });
+
+        // Web Storage Functionality
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const newsletter = document.getElementById('newsletter').checked;
+            const contactMethod = document.getElementById('contactMethod').value;
+
+            // Save form data to Web Storage
+            localStorage.setItem('contactName', name);
+            localStorage.setItem('contactEmail', email);
+            localStorage.setItem('contactMessage', message);
+            localStorage.setItem('contactNewsletter', newsletter);
+            localStorage.setItem('contactMethod', contactMethod);
+
+            alert('Your message has been saved. Thank you for contacting us!');
+        });
+    </script>
+</body>
+</html>

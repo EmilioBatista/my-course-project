@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites - Wealth of Knowledge</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="img/moneylogo.png" alt="Logo">
+        </div>
+        <div class="header-content">
+            <h1>My Favorite Financial Resources</h1>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <button onclick="window.location.href='home.html'">Home</button>
+        <button onclick="window.location.href='booklist.html'">Book List</button>
+        <button onclick="window.location.href='financialtools.html'">Financial Tools</button>
+        <button onclick="window.location.href='articles.html'">Articles</button>
+        <button onclick="window.location.href='about.html'">About Us</button>
+        <button onclick="window.location.href='contact.html'">Contact Us</button>
+        <button onclick="window.location.href='featured.html'">Featured</button>
+        <button onclick="window.location.href='favorites.html'">Favorites</button>
+    </nav>
+
+    <main class="content">
+        <!-- Panel for Entering Favorite Items -->
+        <section class="panel">
+            <h2>Add a New Favorite</h2>
+            <form id="favoriteForm">
+                <label for="favoriteItem">Favorite Item:</label>
+                <input type="text" id="favoriteItem" name="favoriteItem" required>
+                <button type="submit">Add Favorite</button>
+            </form>
+        </section>
+
+        <!-- Grid to Display Favorite Items -->
+        <section class="grid">
+            <h2>Your Favorites</h2>
+            <div id="favoritesGrid">
+                <!-- Grid Items will be added dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Wealth of Knowledge. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to load favorites from localStorage and display in grid
+        function loadFavorites() {
+            const favoritesGrid = document.getElementById('favoritesGrid');
+            favoritesGrid.innerHTML = ''; // Clear existing items
+
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+            favorites.forEach((item, index) => {
+                const gridItem = document.createElement('div');
+                gridItem.className = 'grid-item';
+                gridItem.textContent = item;
+                favoritesGrid.appendChild(gridItem);
+            });
+        }
+
+        // Function to handle form submission and save new favorite
+        document.getElementById('favoriteForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const favoriteItem = document.getElementById('favoriteItem').value;
+
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            favorites.push(favoriteItem);
+
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+
+            document.getElementById('favoriteItem').value = ''; // Clear input
+            loadFavorites(); // Reload favorites to display the new item
+        });
+
+        // Load favorites when the page loads
+        window.onload = loadFavorites;
+    </script>
+</body>
+</html>
