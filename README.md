@@ -33,4 +33,4 @@ The website consists of the following pages:
 
 ## Live Site URL
 The live version of the site can be viewed at:  
-[http://sotd.us/emiliobatista/Course_Project/Module_6/](http://sotd.us/emiliobatista/course_project/module_6.html)
+[http://sotd.us/emiliobatista/Course_Project/Module_6/](http://sotd.us/emiliobatista/course_project/module_6)
